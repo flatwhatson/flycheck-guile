@@ -10,7 +10,7 @@ runs `guild compile` on your code to collect warnings and errors.
 Installation
 ------------
 
-This package is not yet available on [MELPA][melpa].
+This package is not yet available on [MELPA][melpa] or [Guix][guix].
 
 To install it manually, download this code, add the directory to your Emacs
 `load-path`, and `(require 'flycheck-guile)` somewhere in your Emacs
@@ -75,4 +75,5 @@ Studio][guile-studio].
 [geiser]: https://www.nongnu.org/geiser/
 [guile]: https://www.gnu.org/software/guile/guile.html
 [guile-studio]: https://git.elephly.net/software/guile-studio.git
+[guix]: https://guix.gnu.org/
 [melpa]: http://melpa.org
