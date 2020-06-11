@@ -22,8 +22,31 @@ Usage
 The checker will automatically activate in `scheme-mode` buffers with
 `geiser-mode`, where `guile` is the current scheme implementation.
 
+Troubleshooting
+---------------
+
 If it seems like the checker is not working, try running `M-x
 flycheck-verify-checker guile` for some diagnostics.
+
+If the checker is working, but can't find your guile modules (ie. reporting "no
+code for module" errors), make sure that you have correctly configured
+`geiser-guile-load-path` for your project.  The checker uses this variable to
+determine the load paths passed to `guild compile`.
+
+A simple way to configure load paths is to add a `.dir-locals.el` file to the
+root directory of the project:
+
+``` emacs-lisp
+((nil
+  (eval . (with-eval-after-load 'geiser-guile
+            (add-to-list 'geiser-guile-load-path
+                         (file-name-directory
+                          (locate-dominating-file default-directory
+                                                  ".dir-locals.el")))))))
+```
+
+This will look for the Guile module `(foo bar baz)` in `foo/bar/baz.scm`
+relative to the root directory of the project.
 
 License
 -------
