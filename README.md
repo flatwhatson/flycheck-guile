@@ -1,11 +1,29 @@
-[![Melpa Status](http://melpa.org/packages/flycheck-guile-badge.svg)](http://melpa.org/#/flycheck-guile)
+<!-- [![Melpa Status](http://melpa.org/packages/flycheck-guile-badge.svg)](http://melpa.org/#/flycheck-guile) -->
 
 flycheck-guile
 ===============
 
 This library provides a [flycheck][] checker for the [GNU Guile][guile]
-programming language. It requires a working [Geiser][geiser] configuration, and
+programming language.  It requires a working [Geiser][geiser] configuration, and
 runs `guild compile` on your code to collect warnings and errors.
+
+Installation
+------------
+
+This package is not yet available on [MELPA][melpa].
+
+To install it manually, download this code, add the directory to your Emacs
+`load-path`, and `(require 'flycheck-guile)` somewhere in your Emacs
+configuration.
+
+Usage
+-----
+
+The checker will automatically activate in `scheme-mode` buffers with
+`geiser-mode`, where `guile` is the current scheme implementation.
+
+If it seems like the checker is not working, try running `M-x
+flycheck-verify-checker guile` for some diagnostics.
 
 License
 -------
@@ -17,10 +35,10 @@ version.
 
 This program is distributed in the hope that it will be useful, but WITHOUT ANY
 WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
-PARTICULAR PURPOSE. See the GNU General Public License for more details.
+PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License along with
-this program. If not, see <http://www.gnu.org/licenses/>.
+this program.  If not, see <http://www.gnu.org/licenses/>.
 
 See [COPYING](COPYING) for details.
 
@@ -31,6 +49,7 @@ Credits
 Studio][guile-studio].
 
 [flycheck]: https://github.com/flycheck/flycheck
-[guile]: https://www.gnu.org/software/guile/guile.html
 [geiser]: https://www.nongnu.org/geiser/
+[guile]: https://www.gnu.org/software/guile/guile.html
 [guile-studio]: https://git.elephly.net/software/guile-studio.git
+[melpa]: http://melpa.org
