@@ -83,13 +83,13 @@ The list of supported warning types can be found by running
     line-start
     "ice-9/boot-9.scm:" (+ digit) ":" (+ digit) ":" (+ (any space "\n"))
     "In procedure raise-exception:"                 (+ (any space "\n"))
-    "In procedure " (id (+ (not ":"))) ":"          (+ (any space "\n"))
+    "In procedure " (id (+ (not (any ":")))) ":"    (+ (any space "\n"))
     (file-name) ":" line ":" column ":" (message (+? anything)) (* space) string-end)
    (error
     line-start
     "ice-9/boot-9.scm:" (+ digit) ":" (+ digit) ":" (+ (any space "\n"))
     "In procedure raise-exception:"                 (+ (any space "\n"))
-    (id (+ (not ":"))) ":"                          (+ (any space "\n"))
+    (id (+ (not (any ":")))) ":"                    (+ (any space "\n"))
     (file-name) ":" line ":" column ":" (message (+? anything)) (* space) string-end)
    (error
     line-start
