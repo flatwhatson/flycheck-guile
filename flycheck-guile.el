@@ -32,17 +32,31 @@
 
 (require 'flycheck)
 
+(defvar flycheck-guile-warnings
+  '(;"unsupported-warning"         ; warn about unknown warning types
+    "unused-variable"             ; report unused variables
+    ;"unused-toplevel"             ; report unused local top-level variables
+    ;"shadowed-toplevel"           ; report shadowed top-level variables
+    "unbound-variable"            ; report possibly unbound variables
+    "macro-use-before-definition" ; report possibly mis-use of macros before they are defined
+    "arity-mismatch"              ; report procedure arity mismatches (wrong number of arguments)
+    "duplicate-case-datum"        ; report a duplicate datum in a case expression
+    "bad-case-datum"              ; report a case datum that cannot be meaningfully compared using `eqv?'
+    "format"                      ; report wrong number of arguments to `format'
+    )
+  "A list of warnings to enable for `guild compile'.
+
+The value of this variable is a list of strings, where each
+string names a supported warning type.
+
+The list of supported warning types can be found by running
+`guild compile -W help'.")
+
 (flycheck-define-checker guile
-  "A Guile syntax checker with `guild compile'."
+  "A GNU Guile syntax checker using `guild compile'."
   :command ("guild" "compile" "--to=cps"
-            "--warn=unused-variable"
-            "--warn=unused-toplevel"
-            "--warn=unbound-variable"
-            "--warn=macro-use-before-definition"
-            "--warn=arity-mismatch"
-            "--warn=duplicate-case-datum"
-            "--warn=bad-case-datum"
-            "--warn=format"
+            (option-list "-W" flycheck-guile-warnings)
+            (option-list "-L" geiser-guile-load-path list expand-file-name)
             source)
   :predicate
   (lambda ()
@@ -63,9 +77,23 @@
                (t '(bold error)))))))
   :error-patterns
   ((warning
-    line-start (file-name) ":" line ":" column ": warning:" (message) line-end)
+    line-start
+    (file-name) ":" line ":" column ": warning:" (message) line-end)
    (error
-    line-start (file-name) ":" line ":" column ":" (message) line-end))
+    line-start
+    "ice-9/boot-9.scm:" (+ digit) ":" (+ digit) ":" (+ (any space "\n"))
+    "In procedure raise-exception:"                 (+ (any space "\n"))
+    "In procedure " (id (+ (not ":"))) ":"          (+ (any space "\n"))
+    (file-name) ":" line ":" column ":" (message (+? anything)) (* space) string-end)
+   (error
+    line-start
+    "ice-9/boot-9.scm:" (+ digit) ":" (+ digit) ":" (+ (any space "\n"))
+    "In procedure raise-exception:"                 (+ (any space "\n"))
+    (id (+ (not ":"))) ":"                          (+ (any space "\n"))
+    (file-name) ":" line ":" column ":" (message (+? anything)) (* space) string-end)
+   (error
+    line-start
+    (file-name) ":" line ":" column ":" (message (+? anything)) (* space) string-end))
   :modes (scheme-mode geiser-mode))
 
 (add-to-list 'flycheck-checkers 'guile)
