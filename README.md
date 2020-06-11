@@ -39,10 +39,12 @@ root directory of the project:
 ``` emacs-lisp
 ((nil
   (eval . (with-eval-after-load 'geiser-guile
-            (add-to-list 'geiser-guile-load-path
-                         (file-name-directory
-                          (locate-dominating-file default-directory
-                                                  ".dir-locals.el")))))))
+            (let ((root-dir
+                   (file-name-directory
+                    (locate-dominating-file default-directory ".dir-locals.el"))))
+              (unless (member root-dir geiser-guile-load-path)
+                (setq-local geiser-guile-load-path
+                            (cons root-dir geiser-guile-load-path))))))))
 ```
 
 This will look for the Guile module `(foo bar baz)` in `foo/bar/baz.scm`
