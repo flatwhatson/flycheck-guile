@@ -32,7 +32,13 @@
 
 (require 'flycheck)
 
-(defvar flycheck-guile-warnings
+(defgroup flycheck-guile nil
+  "GNU Guile support for Flycheck."
+  :prefix "flycheck-guile-"
+  :group 'flycheck
+  :link '(url-link :tag "Github" "https://github.com/flatwhatson/flycheck-guile"))
+
+(defcustom flycheck-guile-warnings
   '(;"unsupported-warning"         ; warn about unknown warning types
     "unused-variable"             ; report unused variables
     ;"unused-toplevel"             ; report unused local top-level variables
@@ -50,7 +56,9 @@ The value of this variable is a list of strings, where each
 string names a supported warning type.
 
 The list of supported warning types can be found by running
-`guild compile -W help'.")
+`guild compile -W help'."
+  :type '(repeat string)
+  :group 'flycheck-guile)
 
 (flycheck-define-checker guile
   "A GNU Guile syntax checker using `guild compile'."
