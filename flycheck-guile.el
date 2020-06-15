@@ -71,7 +71,7 @@ The list of supported warning types can be found by running
     (and (boundp 'geiser-impl--implementation)
          (eq geiser-impl--implementation 'guile)))
   :verify
-  (lambda (checker)
+  (lambda (_checker)
     (let ((geiser-impl (bound-and-true-p geiser-impl--implementation)))
       (list
        (flycheck-verification-result-new
