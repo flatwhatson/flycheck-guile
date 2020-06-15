@@ -18,25 +18,31 @@ install this package with `M-x package-install flycheck-guile`.
 
 ### Guix
 
-This package is not yet available from [Guix][guix].
+This package is available on [Guix][guix].
 
-An "unofficial" recipe is available [here][guix-package] in the interim.
+It can be installed to your user profile with `guix install
+emacs-flycheck-guile`.
 
 ### Manual installation
 
-To install it manually, download this code, add the directory to your Emacs
-`load-path`, and `(require 'flycheck-guile)` somewhere in your Emacs
-configuration.
+To install it manually, just download this code add the directory to your Emacs
+`load-path`.
 
 ## Usage
 
-The checker will automatically activate in `scheme-mode` buffers with
-`geiser-mode`, where `guile` is the current scheme implementation.
+Call `(require 'flycheck-guile)` somewhere in your Emacs configuration to load
+the checker.
+
+Once loaded, the checker will automatically activate in `scheme-mode` buffers
+with `geiser-mode`, where `guile` is the current scheme implementation.
 
 ## Troubleshooting
 
 If it seems like the checker is not working, try running `M-x
 flycheck-verify-checker guile` for some diagnostics.
+
+It may also be useful to run `M-x flycheck-compile guile`, which shows the full
+compilation command and its output.
 
 If the checker is working, but can't find your guile modules (ie. reporting "no
 code for module" errors), make sure that you have correctly configured
