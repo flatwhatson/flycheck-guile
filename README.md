@@ -1,29 +1,39 @@
-<!-- [![Melpa Status](http://melpa.org/packages/flycheck-guile-badge.svg)](http://melpa.org/#/flycheck-guile) -->
+[![Melpa Status](http://melpa.org/packages/flycheck-guile-badge.svg)](http://melpa.org/#/flycheck-guile)
+[![Melpa Stable Status](http://stable.melpa.org/packages/flycheck-guile-badge.svg)](http://stable.melpa.org/#/flycheck-guile)
 
-flycheck-guile
-===============
+# flycheck-guile
 
 This library provides a [flycheck][] checker for the [GNU Guile][guile]
 programming language.  It requires a working [Geiser][geiser] configuration, and
 runs `guild compile` on your code to collect warnings and errors.
 
-Installation
-------------
+## Installation
 
-This package is not yet available on [MELPA][melpa] or [Guix][guix].
+### MELPA
+
+This package is available on [MELPA][melpa].
+
+After following MELPA's [Getting Started][melpa-getting-started] guide, you can
+install this package with `M-x package-install flycheck-guile`.
+
+### Guix
+
+This package is not yet available from [Guix][guix].
+
+An "unofficial" recipe is available [here][guix-package] in the interim.
+
+### Manual installation
 
 To install it manually, download this code, add the directory to your Emacs
 `load-path`, and `(require 'flycheck-guile)` somewhere in your Emacs
 configuration.
 
-Usage
------
+## Usage
 
 The checker will automatically activate in `scheme-mode` buffers with
 `geiser-mode`, where `guile` is the current scheme implementation.
 
-Troubleshooting
----------------
+## Troubleshooting
 
 If it seems like the checker is not working, try running `M-x
 flycheck-verify-checker guile` for some diagnostics.
@@ -50,8 +60,7 @@ root directory of the project:
 This will look for the Guile module `(foo bar baz)` in `foo/bar/baz.scm`
 relative to the root directory of the project.
 
-License
--------
+## License
 
 This program is free software: you can redistribute it and/or modify it under
 the terms of the GNU General Public License as published by the Free Software
@@ -67,8 +76,7 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 
 See [COPYING](COPYING) for details.
 
-Credits
--------
+## Credits
 
 `flycheck-guile` was originally written by Ricardo Wurmus as part of [Guile
 Studio][guile-studio].
@@ -78,4 +86,6 @@ Studio][guile-studio].
 [guile]: https://www.gnu.org/software/guile/guile.html
 [guile-studio]: https://git.elephly.net/software/guile-studio.git
 [guix]: https://guix.gnu.org/
-[melpa]: http://melpa.org
+[guix-package]: https://github.com/flatwhatson/guix-channel/blob/master/flat/packages/emacs-xyz.scm
+[melpa]: http://melpa.org/
+[melpa-getting-started]: https://melpa.org/#/getting-started
