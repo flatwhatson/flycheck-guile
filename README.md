@@ -36,6 +36,14 @@ the checker.
 Once loaded, the checker will automatically activate in `scheme-mode` buffers
 with `geiser-mode`, where `guile` is the current scheme implementation.
 
+## Configuration
+
+This package can be configured via `M-x customize-group flycheck-guile`.
+
+The `flycheck-guile-warnings` variable contains the list of warnings reported by
+the compiler.  If you find a warning particularly annoying (eg. spurious "unused
+variable" warnings), it can be suppressed by removing it from this list.
+
 ## Troubleshooting
 
 If it seems like the checker is not working, try running `M-x
@@ -92,6 +100,5 @@ Studio][guile-studio].
 [guile]: https://www.gnu.org/software/guile/guile.html
 [guile-studio]: https://git.elephly.net/software/guile-studio.git
 [guix]: https://guix.gnu.org/
-[guix-package]: https://github.com/flatwhatson/guix-channel/blob/master/flat/packages/emacs-xyz.scm
 [melpa]: http://melpa.org/
 [melpa-getting-started]: https://melpa.org/#/getting-started
