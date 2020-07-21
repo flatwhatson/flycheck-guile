@@ -62,7 +62,7 @@ The list of supported warning types can be found by running
 
 (flycheck-define-checker guile
   "A GNU Guile syntax checker using `guild compile'."
-  :command ("guild" "compile" "--to=cps"
+  :command ("guild" "compile" "-O0"
             (option-list "-W" flycheck-guile-warnings)
             (option-list "-L" geiser-guile-load-path list expand-file-name)
             source)
