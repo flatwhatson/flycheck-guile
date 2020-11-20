@@ -1,5 +1,6 @@
 [![Melpa Status](http://melpa.org/packages/flycheck-guile-badge.svg)](http://melpa.org/#/flycheck-guile)
 [![Melpa Stable Status](http://stable.melpa.org/packages/flycheck-guile-badge.svg)](http://stable.melpa.org/#/flycheck-guile)
+[![GNU Guix Status](https://repology.org/badge/version-for-repo/gnuguix/emacs:flycheck-guile.svg?header=GNU%20Guix)](https://repology.org/project/emacs:flycheck-guile/versions)
 
 # flycheck-guile
 
