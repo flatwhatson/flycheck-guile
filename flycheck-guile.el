@@ -60,9 +60,12 @@ The list of supported warning types can be found by running
   :type '(repeat string)
   :group 'flycheck-guile)
 
+(flycheck-def-args-var flycheck-guile-args guile)
+
 (flycheck-define-checker guile
   "A GNU Guile syntax checker using `guild compile'."
   :command ("guild" "compile" "-O0"
+            (eval flycheck-guile-args)
             (option-list "-W" flycheck-guile-warnings)
             (option-list "-L" geiser-guile-load-path list expand-file-name)
             source)

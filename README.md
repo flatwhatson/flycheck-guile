@@ -45,6 +45,10 @@ The `flycheck-guile-warnings` variable contains the list of warnings reported by
 the compiler.  If you find a warning particularly annoying (eg. spurious "unused
 variable" warnings), it can be suppressed by removing it from this list.
 
+The `flycheck-guile-args` variable contains a list of additional arguments to be
+passed to `guild compile`.  This can be useful to pass an `--r6rs` or `--r7rs`
+argument argument when working with standard Scheme.
+
 ## Troubleshooting
 
 If it seems like the checker is not working, try running `M-x
