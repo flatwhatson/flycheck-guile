@@ -7,7 +7,7 @@
 ;; Maintainer: Andrew Whatson <whatson@gmail.com>
 ;; Version: 0.1
 ;; URL: https://github.com/flatwhatson/flycheck-guile
-;; Package-Requires: ((emacs "24.1") (flycheck "0.22") (geiser "0.11"))
+;; Package-Requires: ((emacs "25.1") (flycheck "0.22") (geiser "0.11"))
 
 ;; This file is not part of GNU Emacs.
 
@@ -38,18 +38,24 @@
   :group 'flycheck
   :link '(url-link :tag "Github" "https://github.com/flatwhatson/flycheck-guile"))
 
+(defconst flycheck-guile--warning-specs
+  ;; current warnings for GNU Guile 3.0.8
+  '(("unsupported-warning"         nil  "warn about unknown warning types")
+    ("unused-variable"             nil  "report unused variables")
+    ("unused-toplevel"             nil  "report unused local top-level variables")
+    ("shadowed-toplevel"           nil  "report shadowed top-level variables")
+    ("unbound-variable"            t    "report possibly unbound variables")
+    ("macro-use-before-definition" t    "report possibly mis-use of macros before they are defined")
+    ("use-before-definition"       t    "report uses of top-levels before they are defined")
+    ("non-idempotent-definition"   t    "report names that can refer to imports on first load, but module definitions on second load")
+    ("arity-mismatch"              t    "report procedure arity mismatches (wrong number of arguments)")
+    ("duplicate-case-datum"        t    "report a duplicate datum in a case expression")
+    ("bad-case-datum"              t    "report a case datum that cannot be meaningfully compared using `eqv?'")
+    ("format"                      t    "report wrong number of arguments to `format'")))
+
 (defcustom flycheck-guile-warnings
-  '(;"unsupported-warning"         ; warn about unknown warning types
-    "unused-variable"             ; report unused variables
-    ;"unused-toplevel"             ; report unused local top-level variables
-    ;"shadowed-toplevel"           ; report shadowed top-level variables
-    "unbound-variable"            ; report possibly unbound variables
-    "macro-use-before-definition" ; report possibly mis-use of macros before they are defined
-    "arity-mismatch"              ; report procedure arity mismatches (wrong number of arguments)
-    "duplicate-case-datum"        ; report a duplicate datum in a case expression
-    "bad-case-datum"              ; report a case datum that cannot be meaningfully compared using `eqv?'
-    "format"                      ; report wrong number of arguments to `format'
-    )
+  ;; default warnings are marked T above
+  (mapcar #'car (seq-filter #'cadr flycheck-guile--warning-specs))
   "A list of warnings to enable for `guild compile'.
 
 The value of this variable is a list of strings, where each
@@ -57,7 +63,26 @@ string names a supported warning type.
 
 The list of supported warning types can be found by running
 `guild compile -W help'."
-  :type '(repeat string)
+  :type (let* ((max-length
+                (seq-max (mapcar (lambda (spec)
+                                   (length (car spec)))
+                                 flycheck-guile--warning-specs)))
+               (options
+                (mapcar (lambda (spec)
+                          (let* ((name (car spec))
+                                 (desc (caddr spec))
+                                 (pad (make-string (- max-length (length name)) ?\s)))
+                            `(const
+                              :tag ,(format "%s%s ; %s" name pad desc)
+                              ,name)))
+                        flycheck-guile--warning-specs)))
+          `(choice
+            (list :tag "Level 0 (no warnings)" (const "0"))
+            (list :tag "Level 1 (default)" (const "1"))
+            (list :tag "Level 2" (const "2"))
+            (list :tag "Level 3" (const "3"))
+            (set :tag "Select warnings" ,@options)
+            (repeat :tag "Specify warnings" string)))
   :group 'flycheck-guile)
 
 (flycheck-def-args-var flycheck-guile-args guile)
