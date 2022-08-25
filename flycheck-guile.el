@@ -86,10 +86,14 @@ The list of supported warning types can be found by running
         :face (cond
                ((or (eq geiser-impl 'guile)) 'success)
                (t '(bold error)))))))
+  :error-filter flycheck-fill-empty-line-numbers
   :error-patterns
   ((warning
     line-start
     (file-name) ":" line ":" column ": warning:" (message) line-end)
+   (warning
+    line-start
+    "<unknown-location>: warning:" (message) line-end)
    (error
     line-start
     "ice-9/boot-9.scm:" (+ digit) ":" (+ digit) ":" (+ (any space "\n"))
