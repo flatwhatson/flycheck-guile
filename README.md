@@ -58,26 +58,18 @@ It may also be useful to run `M-x flycheck-compile guile`, which shows the full
 compilation command and its output.
 
 If the checker is working, but can't find your guile modules (ie. reporting "no
-code for module" errors), make sure that you have correctly configured
-`geiser-guile-load-path` for your project.  The checker uses this variable to
-determine the load paths passed to `guild compile`.
+code for module" errors), make sure that you have correctly configured your
+Geiser REPL.  The `geiser-guile-load-path` and `geiser-repl-add-project-paths`
+variables control how Geiser sets up paths, and the checker also uses these to
+determine the load path arguments for `guild compile`.
 
-A simple way to configure load paths is to add a `.dir-locals.el` file to the
-root directory of the project:
+If your project has scheme files in the top-level, so the Guile module `(foo bar
+baz)` is declared in `foo/bar/baz.scm`, set `geiser-repl-add-project-paths` to
+`t` or `'(".")`.
 
-``` emacs-lisp
-((nil
-  (eval . (with-eval-after-load 'geiser-guile
-            (let ((root-dir
-                   (file-name-directory
-                    (locate-dominating-file default-directory ".dir-locals.el"))))
-              (make-local-variable 'geiser-guile-load-path)
-              (add-to-list 'geiser-guile-load-path root-dir))))
-  ))
-```
-
-This will look for the Guile module `(foo bar baz)` in `foo/bar/baz.scm`
-relative to the root directory of the project.
+If your project has scheme files in a sub-directory "src", so the Guile module
+`(foo bar baz)` is declared in `src/foo/bar/baz.scm`, set
+`geiser-repl-add-project-paths` to `'("src")`.
 
 ## License
 
