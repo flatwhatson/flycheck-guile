@@ -47,7 +47,7 @@ variable" warnings), it can be suppressed by removing it from this list.
 
 The `flycheck-guile-args` variable contains a list of additional arguments to be
 passed to `guild compile`.  This can be useful to pass an `--r6rs` or `--r7rs`
-argument argument when working with standard Scheme.
+argument when working with standard Scheme.
 
 ## Troubleshooting
 
