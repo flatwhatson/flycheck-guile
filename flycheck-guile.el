@@ -111,6 +111,22 @@ The list of supported warning types can be found by running
                      geiser-repl-add-project-paths)))
     nil))
 
+(defun flycheck-guile--filter-errors (errors)
+  "Fix up ERRORS before passing them to flycheck."
+  (seq-do (lambda (err)
+            ;; errors without a line are on line 0
+            ;; see `flycheck-fill-empty-line-numbers'
+            (unless (flycheck-error-line err)
+              (setf (flycheck-error-line err) 0))
+            ;; flycheck wants 1-based columns, guile gives 0-based
+            ;; see `flycheck-increment-error-columns'
+            (when (flycheck-error-column err)
+              (cl-incf (flycheck-error-column err) 1))
+            (when (flycheck-error-end-column err)
+              (cl-incf (flycheck-error-end-column err) 1)))
+          errors)
+  errors)
+
 (flycheck-define-checker guile
   "A GNU Guile syntax checker using `guild compile'."
   :command ("guild" "compile" "-O0"
@@ -135,7 +151,7 @@ The list of supported warning types can be found by running
         :face (cond
                ((or (eq geiser-impl 'guile)) 'success)
                (t '(bold error)))))))
-  :error-filter flycheck-fill-empty-line-numbers
+  :error-filter flycheck-guile--filter-errors
   :error-patterns
   ((warning
     line-start
