@@ -43,10 +43,11 @@
   :link '(url-link :tag "Github" "https://github.com/flatwhatson/flycheck-guile"))
 
 (defconst flycheck-guile--warning-specs
-  ;; current warnings for GNU Guile 3.0.8
+  ;; current warnings for GNU Guile 3.0.9-16-ge334e5958
   '(("unsupported-warning"         nil  "warn about unknown warning types")
     ("unused-variable"             nil  "report unused variables")
     ("unused-toplevel"             nil  "report unused local top-level variables")
+    ("unused-module"               nil  "report unused modules")
     ("shadowed-toplevel"           nil  "report shadowed top-level variables")
     ("unbound-variable"            t    "report possibly unbound variables")
     ("macro-use-before-definition" t    "report possibly mis-use of macros before they are defined")
