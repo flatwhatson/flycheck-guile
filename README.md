@@ -35,7 +35,7 @@ Call `(require 'flycheck-guile)` somewhere in your Emacs configuration to load
 the checker.
 
 Once loaded, the checker will automatically activate in `scheme-mode` buffers
-with `geiser-mode`, where `guile` is the current scheme implementation.
+with `geiser-mode` active, where `guile` is the current scheme implementation.
 
 ## Configuration
 

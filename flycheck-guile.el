@@ -136,11 +136,13 @@ The list of supported warning types can be found by running
             source)
   :predicate
   (lambda ()
-    (and (boundp 'geiser-impl--implementation)
-         (eq geiser-impl--implementation 'guile)))
+    (and (bound-and-true-p geiser-mode)
+         (eq (bound-and-true-p geiser-impl--implementation)
+             'guile)))
   :verify
   (lambda (_checker)
-    (let ((geiser-impl (bound-and-true-p geiser-impl--implementation)))
+    (let ((geiser-impl (and (bound-and-true-p geiser-mode)
+                            (bound-and-true-p geiser-impl--implementation))))
       (list
        (flycheck-verification-result-new
         :label "Geiser Implementation"
