@@ -1,11 +1,11 @@
 ;;; flycheck-guile.el --- A Flycheck checker for GNU Guile -*- lexical-binding: t -*-
 
 ;; Copyright (C) 2019  Ricardo Wurmus <rekado@elephly.net>
-;; Copyright (C) 2020  Free Software Foundation, Inc
+;; Copyright (C) 2020, 2022, 2023  Free Software Foundation, Inc
 
 ;; Author: Ricardo Wurmus <rekado@elephly.net>
-;; Maintainer: Andrew Whatson <whatson@gmail.com>
-;; Version: 0.1
+;; Maintainer: Andrew Whatson <whatson@tailcall.au>
+;; Version: 0.5
 ;; URL: https://github.com/flatwhatson/flycheck-guile
 ;; Package-Requires: ((emacs "25.1") (flycheck "0.22") (geiser "0.20"))
 
