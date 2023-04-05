@@ -6,7 +6,7 @@
 ;; Author: Ricardo Wurmus <rekado@elephly.net>
 ;; Maintainer: Andrew Whatson <whatson@tailcall.au>
 ;; Version: 0.5
-;; URL: https://github.com/flatwhatson/flycheck-guile
+;; URL: https://notabug.org/flatwhatson/flycheck-guile
 ;; Package-Requires: ((emacs "25.1") (flycheck "0.22") (geiser "0.20"))
 
 ;; This file is not part of GNU Emacs.
@@ -40,7 +40,7 @@
   "GNU Guile support for Flycheck."
   :prefix "flycheck-guile-"
   :group 'flycheck
-  :link '(url-link :tag "Github" "https://github.com/flatwhatson/flycheck-guile"))
+  :link '(url-link :tag "Homepage" "https://notabug.org/flatwhatson/flycheck-guile"))
 
 (defconst flycheck-guile--warning-specs
   ;; current warnings for GNU Guile 3.0.9-16-ge334e5958
